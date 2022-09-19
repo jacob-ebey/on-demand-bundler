@@ -21,6 +21,9 @@ jobs:
       - name: 📥 Install Deps
         uses: bahmutov/npm-install@v1
 
+      - name: 🛠 Build
+        run: npm run build
+
       - name: Create Release Pull Request or Release
         id: changesets
         uses: changesets/action@v1
