@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "https://deno.land/std@0.156.0/node/fs.ts";
 import {
+  toFileUrl,
   fromFileUrl,
   resolve as resolvePath,
 } from "https://deno.land/std@0.156.0/node/path.ts";
@@ -25,7 +26,7 @@ export const writeFileAsync = promisify(writeFile) as (
 ) => Promise<string>;
 
 export function doResolve(id: string, parent: string) {
-  const specifier = resolvePath(parent, id);
+  const specifier = toFileUrl(resolvePath(parent, id)).href;
   const resolved = fromFileUrl(import.meta.resolve(specifier));
   return Promise.resolve(resolved);
 }
