@@ -1,0 +1,20 @@
+{
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "#bundler": ["./src/bundler.ts"],
+      "#deps": ["./src/deps.nodeish.ts"],
+      "#on-demand-bundler": ["./src/mod.ts"],
+      "#plugins": ["./src/plugins.nodeish.ts"]
+    },
+    "module": "esnext",
+    "target": "esnext",
+    "types": ["bun-types"],
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "on-demand-bundler",
+  "type": "module",
+  "scripts": {
+    "build": "etsc",
+    "test:deno": "deno test --allow-env --allow-run --allow-read --allow-write --allow-net ./test/deno/",
+    "test:node": "vitest run"
+  },
+  "main": "dist/mod.js",
+  "types": "src/mod.ts",
+  "imports": {
+    "#bundler": {
+      "types": "./src/bundler.ts",
+      "default": "./src/bundler.ts"
+    },
+    "#deps": {
+      "types": "./src/deps.nodeish.ts",
+      "default": "./src/deps.nodeish.ts"
+    },
+    "#on-demand-bundler": {
+      "types": "./src/mod.ts",
+      "default": "./dist/mod.js"
+    },
+    "#plugins": {
+      "types": "./src/plugins.nodeish.ts",
+      "default": "./src/plugins.nodeish.ts"
+    }
+  },
+  "dependencies": {
+    "esbuild": "0.15.8",
+    "esbuild-wasm": "0.15.8"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "bun-types": "^0.1.11",
+    "cross-env": "^7.0.3",
+    "esbuild-node-externals": "^1.5.0",
+    "esbuild-node-tsc": "^2.0.2",
+    "preact": "10.11.0",
+    "typescript": "^4.8.3",
+    "vitest": "^0.23.4"
+  }
+}
