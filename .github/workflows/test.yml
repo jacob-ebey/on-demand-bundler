@@ -40,7 +40,7 @@ jobs:
         run: bun install --production
 
       - name: 🧪 Test Source
-        run: bun run test:bun
+        run: bun wiptest test/bun
 
   deno:
     runs-on: ubuntu-latest
