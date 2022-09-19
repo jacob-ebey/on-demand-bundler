@@ -12,10 +12,17 @@
     "lint:deno": "deno lint",
     "check": "concurrently \"npm:check:*\"",
     "check:deno": "deno check ./mod.ts",
-    "check:nodeish": "tsc -b"
+    "check:nodeish": "tsc -b",
+    "release": "changeset publish",
+    "version": "changeset version"
   },
   "main": "dist/mod.js",
   "types": "mod.ts",
+  "files": [
+    "dist",
+    "mod.ts",
+    "src/"
+  ],
   "imports": {
     "#bundler": {
       "types": "./src/bundler.ts",
@@ -40,6 +47,8 @@
     "esbuild-wasm": "0.15.8"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.6",
+    "@changesets/cli": "^2.24.4",
     "@types/node": "^18.7.18",
     "bun-types": "^0.1.11",
     "concurrently": "^7.4.0",
