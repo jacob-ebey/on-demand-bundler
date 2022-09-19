@@ -10,13 +10,6 @@ export const fromFileUrl = (url: string | URL) => {
 
 export const readFileAsync = promisify(readFile);
 export const writeFileAsync = promisify(writeFile);
-
-let esbuild: typeof esbuildBrowser;
-if (typeof Bun !== "undefined") {
-  esbuild = esbuildBrowser;
-} else {
-  esbuild = await import("esbuild");
-}
 declare global {
   var esbuildInitialized: Promise<typeof esbuildBrowser>;
   var globalResolver: (id: string, parent: string) => Promise<string>;
@@ -27,9 +20,14 @@ export async function doResolve(id: string, parent: string) {
     if (typeof Bun !== "undefined") {
       globalThis.globalResolver = Bun.resolve;
     } else {
-      const { CachedInputFileSystem, ResolverFactory } = await import(
-        "enhanced-resolve"
-      );
+      const { createRequire } = await import("module");
+      const require = createRequire(import.meta.url);
+
+      const required = require("enhanced-resolve") as
+        | typeof import("enhanced-resolve")
+        | { default: typeof import("enhanced-resolve") };
+      const { CachedInputFileSystem, ResolverFactory } =
+        "default" in required ? required.default : required;
       const resolver = ResolverFactory.createResolver({
         extensions: [".js", ".jsx", ".ts", ".tsx"],
         fileSystem: new CachedInputFileSystem(await import("fs"), 4000),
@@ -55,6 +53,13 @@ export async function doResolve(id: string, parent: string) {
 }
 
 export type { esbuildBrowser as esbuildTypes };
+
+let esbuild: typeof esbuildBrowser;
+if (typeof Bun !== "undefined") {
+  esbuild = esbuildBrowser;
+} else {
+  esbuild = await import("esbuild");
+}
 
 export function ensureEsbuildInitialized() {
   if (!globalThis.esbuildInitialized) {

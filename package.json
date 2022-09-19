@@ -7,6 +7,7 @@
     "test:bun": "bun wiptest test/bun",
     "test:deno": "deno test --allow-env --allow-run --allow-read --allow-write --allow-net ./test/deno/",
     "test:node": "vitest run",
+    "test:node-build": "cross-env TEST_BUILD=1 vitest run",
     "lint": "concurrently \"npm:lint:*\"",
     "lint:deno": "deno lint",
     "check": "concurrently \"npm:check:*\"",
