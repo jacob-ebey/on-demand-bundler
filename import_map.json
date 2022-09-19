@@ -2,7 +2,7 @@
   "imports": {
     "#bundler": "./src/bundler.ts",
     "#deps": "./src/deps.deno.ts",
-    "#on-demand-bundler": "./src/mod.ts",
+    "#on-demand-bundler": "./mod.ts",
     "#plugins": "./src/plugins.deno.ts",
     "preact": "https://esm.sh/preact@10.11.0",
     "preact/hooks": "https://esm.sh/preact@10.11.0/hooks"

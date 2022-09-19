@@ -4,7 +4,7 @@ import { nodeExternalsPlugin } from "esbuild-node-externals";
 export default {
   tsConfigFile: "tsconfig.build.json",
   esbuild: {
-    entryPoints: ["src/mod.ts"],
+    entryPoints: ["mod.ts"],
     bundle: true,
     target: "esnext",
     format: "esm",

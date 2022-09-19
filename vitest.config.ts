@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 
 const modPath = process.env.TEST_BUILD
   ? path.resolve("./dist/mod.js")
-  : path.resolve("./src/mod.ts");
+  : path.resolve("./mod.ts");
 
 export default defineConfig({
   test: {

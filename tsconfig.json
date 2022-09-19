@@ -6,7 +6,7 @@
     "paths": {
       "#bundler": ["./src/bundler.ts"],
       "#deps": ["./src/deps.nodeish.ts"],
-      "#on-demand-bundler": ["./src/mod.ts"],
+      "#on-demand-bundler": ["./mod.ts"],
       "#plugins": ["./src/plugins.nodeish.ts"]
     },
     "module": "esnext",

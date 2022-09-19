@@ -11,11 +11,11 @@
     "lint": "concurrently \"npm:lint:*\"",
     "lint:deno": "deno lint",
     "check": "concurrently \"npm:check:*\"",
-    "check:deno": "deno check ./src/mod.ts",
+    "check:deno": "deno check ./mod.ts",
     "check:nodeish": "tsc -b"
   },
   "main": "dist/mod.js",
-  "types": "src/mod.ts",
+  "types": "mod.ts",
   "imports": {
     "#bundler": {
       "types": "./src/bundler.ts",
@@ -26,8 +26,8 @@
       "default": "./src/deps.nodeish.ts"
     },
     "#on-demand-bundler": {
-      "types": "./src/mod.ts",
-      "default": "./src/mod.ts"
+      "types": "./mod.ts",
+      "default": "./mod.ts"
     },
     "#plugins": {
       "types": "./src/plugins.nodeish.ts",

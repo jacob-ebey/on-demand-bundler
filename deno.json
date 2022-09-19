@@ -9,6 +9,7 @@
     "files": {
       "exclude": [
         "node_modules/",
+        "dist/",
         "src/deps.nodeish.ts",
         "src/plugins.nodeish.ts",
         "test/bun/",
