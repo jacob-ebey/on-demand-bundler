@@ -1,0 +1,37 @@
+name: 🔍 Code Checks
+on: [push]
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    name: 🧪 Node
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+
+      - name: 📥 Install Deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🧪 Check
+        run: npm run check:nodeish
+
+  deno:
+    runs-on: ubuntu-latest
+    name: 🧪 Deno
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: 🧪 Lint
+        run: deno lint
+
+      - name: 🧪 Check
+        run: deno check ./src/mod.ts
