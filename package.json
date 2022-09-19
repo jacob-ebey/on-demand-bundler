@@ -20,7 +20,7 @@
   "main": "dist/mod.js",
   "types": "mod.ts",
   "files": [
-    "dist",
+    "dist/",
     "mod.ts",
     "src/"
   ],
