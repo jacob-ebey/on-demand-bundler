@@ -1,0 +1,55 @@
+name: 🔍 Test
+on: [push]
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    name: 🧪 Node
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+
+      - name: 📥 Install Deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🧪 Test Source
+        run: npm run test:node
+
+      - name: 🧪 Test Build
+        run: npm run test:node-build
+
+  bun:
+    runs-on: ubuntu-latest
+    name: 🧪 Bun
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install bun
+        uses: xhyrom/setup-bun@v0.1.2
+        with:
+          bun-version: latest
+
+      - name: 📥 Install Deps
+        run: bun install --production
+
+      - name: 🧪 Test Source
+        run: bun run test:bun
+
+  deno:
+    runs-on: ubuntu-latest
+    name: 🧪 Deno
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: 🧪 Test Source
+        run: deno test --allow-env --allow-run --allow-read --allow-write --allow-net ./test/deno/
