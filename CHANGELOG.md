@@ -1,5 +1,11 @@
 # on-demand-bundler
 
+## 0.0.4
+
+### Patch Changes
+
+- [`ef91da9`](https://github.com/jacob-ebey/on-demand-bundler/commit/ef91da9737c6abd693cfb82fd0c87879131c3f65) Thanks [@jacob-ebey](https://github.com/jacob-ebey)! - updated build script
+
 ## 0.0.3
 
 ### Patch Changes
