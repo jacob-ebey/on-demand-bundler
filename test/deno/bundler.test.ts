@@ -20,7 +20,8 @@ it("bundles simple preact component", async () => {
   assertEquals(typeof bundleFile, "function");
   const bundled = await bundleFile({
     rootDirectory: resolvePath("./test/fixture"),
-    fileToBundle: resolvePath(Deno.cwd(), "test/fixture/allowed/simple"),
+    // TODO: Document that Deno must have file extension for module resolution algorithm to work.
+    fileToBundle: resolvePath(Deno.cwd(), "test/fixture/allowed/simple.tsx"),
     include: [/test[\/\\]fixture[\/\\]allowed[\/\\]/],
     publicPath: "/_script",
     jsxImportSource: "preact",

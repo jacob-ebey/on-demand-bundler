@@ -1,5 +1,6 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
+  "exclude": ["**/*.deno.ts", "test/deno", "test/fixture"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -15,6 +16,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "strict": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true
   }
 }

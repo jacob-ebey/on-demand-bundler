@@ -1,9 +1,18 @@
 import { readFile, writeFile } from "https://deno.land/std@0.156.0/node/fs.ts";
+import {
+  fromFileUrl,
+  resolve as resolvePath,
+} from "https://deno.land/std@0.156.0/node/path.ts";
 import { promisify } from "https://deno.land/std@0.156.0/node/util.ts";
 import esbuildWasm from "https://esm.sh/esbuild-wasm@0.15.8/lib/browser.js?pin=v86&target=deno";
 import * as esbuildNative from "https://deno.land/x/esbuild@v0.15.8/mod.js";
 
-export { extname, fromFileUrl, resolve as resolvePath, isAbsolute } from "https://deno.land/std@0.156.0/node/path.ts";
+export {
+  extname,
+  fromFileUrl,
+  resolve as resolvePath,
+  isAbsolute,
+} from "https://deno.land/std@0.156.0/node/path.ts";
 
 export const readFileAsync = promisify(readFile) as (
   path: string,
@@ -14,6 +23,12 @@ export const writeFileAsync = promisify(writeFile) as (
   contents: string,
   encoding: "utf8"
 ) => Promise<string>;
+
+export function doResolve(id: string, parent: string) {
+  const specifier = resolvePath(parent, id);
+  const resolved = fromFileUrl(import.meta.resolve(specifier));
+  return Promise.resolve(resolved);
+}
 
 export type { esbuildWasm as esbuildTypes };
 

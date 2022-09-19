@@ -3,11 +3,11 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: ["test/nodeish/**/*.test.ts"],
+    include: ["test/node/**/*.test.ts"],
     alias: {
       "#bundler": path.resolve("./src/bundler.ts"),
       "#deps": path.resolve("./src/deps.nodeish.ts"),
-      "#on-demand-bundler": path.resolve("./dist/mod.js"),
+      "#on-demand-bundler": path.resolve("./src/mod.ts"),
       "#plugins": path.resolve("./src/plugins.nodeish.ts"),
     },
   },

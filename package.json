@@ -3,8 +3,15 @@
   "type": "module",
   "scripts": {
     "build": "etsc",
+    "test": "concurrently \"npm:test:*\"",
+    "test:bun": "bun wiptest test/bun",
     "test:deno": "deno test --allow-env --allow-run --allow-read --allow-write --allow-net ./test/deno/",
-    "test:node": "vitest run"
+    "test:node": "vitest run",
+    "lint": "concurrently \"npm:lint:*\"",
+    "lint:deno": "deno lint",
+    "check": "concurrently \"npm:check:*\"",
+    "check:deno": "deno check ./src/mod.ts",
+    "check:nodeish": "tsc -b"
   },
   "main": "dist/mod.js",
   "types": "src/mod.ts",
@@ -19,7 +26,7 @@
     },
     "#on-demand-bundler": {
       "types": "./src/mod.ts",
-      "default": "./dist/mod.js"
+      "default": "./src/mod.ts"
     },
     "#plugins": {
       "types": "./src/plugins.nodeish.ts",
@@ -27,12 +34,14 @@
     }
   },
   "dependencies": {
+    "enhanced-resolve": "^5.10.0",
     "esbuild": "0.15.8",
     "esbuild-wasm": "0.15.8"
   },
   "devDependencies": {
     "@types/node": "^18.7.18",
     "bun-types": "^0.1.11",
+    "concurrently": "^7.4.0",
     "cross-env": "^7.0.3",
     "esbuild-node-externals": "^1.5.0",
     "esbuild-node-tsc": "^2.0.2",

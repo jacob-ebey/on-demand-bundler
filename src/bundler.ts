@@ -59,6 +59,8 @@ export async function bundleFile(args: BundleFileArgs) {
     jsx: "automatic",
     jsxImportSource: args.jsxImportSource,
     minify: mode === "production",
+    // absWorkingDir: rootDirectory,
+    sourceRoot: rootDirectory,
     plugins: [
       externalsPlugin({
         rootDirectory: args.rootDirectory,

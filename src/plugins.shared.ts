@@ -1,10 +1,10 @@
 import {
+  doResolve,
   esbuildTypes,
   extname,
   fromFileUrl,
   isAbsolute,
   readFileAsync,
-  resolvePath,
 } from "#deps";
 
 export function externalsPlugin({
@@ -19,7 +19,7 @@ export function externalsPlugin({
   return {
     name: "local-externals",
     setup(build) {
-      build.onResolve({ filter: /.*/ }, (args) => {
+      build.onResolve({ filter: /.*/ }, async (args) => {
         if (isBareModuleId(args.path)) {
           const pkg = parseBareModuleId(args.path);
 
@@ -29,27 +29,27 @@ export function externalsPlugin({
           };
         }
 
-        if (args.path.startsWith(".")) {
-          const path = args.path.startsWith("file:")
-            ? fromFileUrl(args.path)
-            : args.path;
-          const resolveDir = args.resolveDir.startsWith("file:")
-            ? fromFileUrl(args.resolveDir)
-            : args.resolveDir;
-          const toBundle = resolvePath(resolveDir, path);
+        const path = args.path.startsWith("file:")
+          ? fromFileUrl(args.path)
+          : args.path;
+        const resolveDir = args.resolveDir.startsWith("file:")
+          ? fromFileUrl(args.resolveDir)
+          : args.resolveDir;
+        const toBundle = await doResolve(path, resolveDir);
 
-          if (!toBundle.startsWith(rootDirectory)) {
-            throw new Error(
-              `The file to bundle must be inside the root directory.`
-            );
-          }
+        if (!toBundle.startsWith(rootDirectory)) {
+          throw new Error(
+            `The file to bundle must be inside the root directory.`
+          );
+        }
 
-          if (!toInclude.some((pattern) => pattern.test(toBundle))) {
-            throw new Error(
-              `The file to bundle must be included in the include patterns.`
-            );
-          }
+        if (!toInclude.some((pattern) => pattern.test(toBundle))) {
+          throw new Error(
+            `The file to bundle must be included in the include patterns.`
+          );
+        }
 
+        if (args.importer) {
           const src = toBundle
             .slice(rootDirectory.length + 1)
             .replace(/\\/g, "/");
@@ -60,7 +60,9 @@ export function externalsPlugin({
           };
         }
 
-        return undefined;
+        return {
+          path: toBundle,
+        };
       });
     },
   };
